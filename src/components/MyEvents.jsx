@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MyOwnEvents from './MyOwnEvents';
 import MyAttendingEvents from './MyAttendingEvents';
+import ModalAdd from './ModalAdd';
 
 class MyEvents extends Component{
     constructor(props){
@@ -8,7 +9,8 @@ class MyEvents extends Component{
 
         this.state = {
             myOwnEvents: [],
-            myAttendingEvents: []
+            myAttendingEvents: [],
+            show: false
         }
     }
 
@@ -35,14 +37,42 @@ class MyEvents extends Component{
         })
     }
 
+    handleAddClick(e){    
+        this.setState({show: true});
+    }
+
+    handleDeleteClick(e){
+        let eventsList = this.state.myOwnEvents;
+        eventsList.splice(e.target.name,1);
+        this.setState({
+            myOwnEvents: eventsList
+        })
+    }
+
+    handleSubmit(){
+        this.setState({show: false});
+    }
+    handleCancel(){
+        this.setState({show: false});
+    }
+
     render(){
-        console.log(this.state.myOwnEvents)
-        console.log(this.state.myAttendingEvents)
         return(
             <div className="myEventsBody container">
+                <ModalAdd
+                    show={this.state.show} 
+                    listEvent={this.state.myOwnEvents}
+                    onCancel={()=>{this.handleCancel()}}
+                    onSubmit={()=>{this.handleSubmit()}}
+                />
+
                 <h2>My Events</h2>
-                <MyOwnEvents myEvents={this.state.myOwnEvents} />
-                <button className="btn btn-info">Add Event</button>
+                
+                <MyOwnEvents
+                    myEvents={this.state.myOwnEvents} 
+                    onDeleteClick={(e)=>{this.handleDeleteClick(e)}}    
+                />
+                <button onClick={(e)=>{this.handleAddClick(e)}} className="btn btn-info">Add Event</button>
                 <MyAttendingEvents myEvents={this.state.myAttendingEvents} />
             </div>
         )

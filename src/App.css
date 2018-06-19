@@ -40,5 +40,22 @@ body {
     border-radius: 4px;
     color: #0b1724;
     background-color: aliceblue; }
+.myEventsBody .modalBackDrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 0; }
+  .myEventsBody .modalBackDrop .modalForeDrop {
+    position: relative;
+    background: white;
+    border-radius: 8px;
+    max-width: 80%;
+    min-height: 40%;
+    margin: 15% auto 0px;
+    padding: 20px;
+    text-align: center; }
 
 /*# sourceMappingURL=App.css.map */

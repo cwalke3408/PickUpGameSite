@@ -58,6 +58,8 @@ class Register extends Component{
         if(Object.values(data).indexOf(false) !== -1){
             console.log("Error in the Form");
             return;
+        } else {
+            console.log("Successful Registration")
         }
 
 
