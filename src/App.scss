@@ -1,0 +1,71 @@
+$main-back-color: rgb(205, 224, 252);
+$primary-color: rgb(9, 151, 187);
+$secdary-color: rgb(11, 23, 36);
+$font-statck: Helvetica, sans-serif;
+
+body{
+    background-color: $main-back-color;
+    font: $font-statck;
+}
+
+.NavBarBody{
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: $secdary-color;
+        overflow: hidden;
+    }
+
+    li{
+        float: right;
+
+        a{
+            display: block;
+            color: $primary-color;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        a:hover{
+            background-color: #111;
+
+        }
+    }
+}
+
+.loginBody{
+    padding-top: 50px;
+
+    .loginForm{
+        text-align: center;
+        background-color: aliceblue;
+        border-radius: 8px;
+        padding: 20px;
+
+        h2{
+            padding-top: 0;
+        }
+
+        a{
+            display: block;
+        }
+    }
+}
+
+.myEventsBody{
+
+    .attendingBody{
+        background-color: $primary-color;
+        border: 2px black solid;
+        border-radius: 4px;
+        .attendingElement{
+            border: 2px black solid;
+            border-radius: 4px;
+            color: $secdary-color;
+            background-color: aliceblue;
+
+        }
+    }
+}

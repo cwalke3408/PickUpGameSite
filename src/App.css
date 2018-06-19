@@ -1,0 +1,44 @@
+body {
+  background-color: #cde0fc;
+  font: Helvetica, sans-serif; }
+
+.NavBarBody ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #0b1724;
+  overflow: hidden; }
+.NavBarBody li {
+  float: right; }
+  .NavBarBody li a {
+    display: block;
+    color: #0997bb;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; }
+  .NavBarBody li a:hover {
+    background-color: #111; }
+
+.loginBody {
+  padding-top: 50px; }
+  .loginBody .loginForm {
+    text-align: center;
+    background-color: aliceblue;
+    border-radius: 8px;
+    padding: 20px; }
+    .loginBody .loginForm h2 {
+      padding-top: 0; }
+    .loginBody .loginForm a {
+      display: block; }
+
+.myEventsBody .attendingBody {
+  background-color: #0997bb;
+  border: 2px black solid;
+  border-radius: 4px; }
+  .myEventsBody .attendingBody .attendingElement {
+    border: 2px black solid;
+    border-radius: 4px;
+    color: #0b1724;
+    background-color: aliceblue; }
+
+/*# sourceMappingURL=App.css.map */
