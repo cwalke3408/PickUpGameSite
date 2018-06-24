@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class ModalAdd extends Component{
     constructor(props){
@@ -24,8 +25,6 @@ class ModalAdd extends Component{
             title: false,
             description: false
         }
-        console.log(newEventEntry)
-        console.log(this.state)
 
         newEventEntry.time = this.state.time === "" ? (false) : this.state.time;
         newEventEntry.location = this.state.location === '' ? (false) : this.state.location;
@@ -40,20 +39,31 @@ class ModalAdd extends Component{
         this.props.listEvent.push(newEventEntry);
         this.props.onSubmit();
 
+
+
+        let data =  {
+            Id: 0,
+            title: this.state.title,
+            timedate: this.state.time,
+            location: this.state.location,
+            description: this.state.description,
+            author: 'abc',
+            count: 1   
+        }
+
+        axios.post("http://localhost:8080/addEvent", data)
+        .then((res) => {console.log("res: "); console.log(res);})
+        .catch(function(error) {if (!error.error); });
+
+
         this.setState({
             time: '',
             location: '',
             title: '',
             description: ''
         });
-
-        // {
-        //     time: "9",
-        //     location: "Smyrna, GA",
-        //     title: "Baseball?",
-        //     description: "Let the double faults begin!!!"
-        // }
     }
+
     handleChange(e){
         this.setState({[e.target.name]: e.target.value});
     }

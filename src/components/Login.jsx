@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Login extends Component{
     constructor(props){
@@ -15,16 +16,21 @@ class Login extends Component{
     }
 
     handleClick(){
-        if(this.state.password === "1234" && this.state.userName === "user"){
-            console.log("Success");
-        } else {
-            console.log("Failed");
+        // if(this.state.password === "1234" && this.state.userName === "user"){
+        //     console.log("Success");
+
+        // } else {
+        //     console.log("Failed");
+        // }
+        let data = {
+            username: this.state.userName,
+            password: this.state.password
         }
-     // axios({
-    //     method: "POST",
-    //     url: "http//:localhost:3030/login",
-    //     data: data
-    // })
+
+        axios.post("http://localhost:8080/login", data)
+        .then((res) => {console.log("res: "); console.log(res);})
+        .catch(function(error) {if (!error.error); });
+
     }
 
     render(){

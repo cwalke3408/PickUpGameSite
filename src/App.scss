@@ -91,3 +91,25 @@ body{
         }
     }
 }
+
+.FindPickUpBody{
+    .mapBody{
+        // border: 2px yellow solid;
+        max-height: 200px;
+
+        .mapReal{
+            border: 2px navy solid;
+            border-radius: 8px;
+            height: 50% !important;
+            width: 100% !important;
+        }
+    }
+
+    .newFeed{
+        position: fixed !important;
+        top: 400px !important;
+        height: 50%;
+        border: 3px red solid;
+        margin-top: 200px !important;
+    }
+}

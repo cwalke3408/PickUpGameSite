@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MyOwnEvents from './MyOwnEvents';
 import MyAttendingEvents from './MyAttendingEvents';
 import ModalAdd from './ModalAdd';
+import axios from 'axios';
 
 class MyEvents extends Component{
     constructor(props){
@@ -15,6 +16,14 @@ class MyEvents extends Component{
     }
 
     componentDidMount(){
+
+        let data = {
+            username: "abc"
+        }
+
+        axios.post("http://localhost:8080/userEvents", data)
+            .then((res) => {console.log(res)})
+            .catch(function(error){if (!error.error); })
 
         this.setState({
             myOwnEvents: [{
@@ -51,6 +60,32 @@ class MyEvents extends Component{
 
     handleSubmit(){
         this.setState({show: false});
+
+        // let data = {
+        //      events:[
+        //             {
+        //                 id: 1,
+        //                 title: '1',
+        //                 timedate: '1',
+        //                 location: '1',
+        //                 description: '1',
+        //                 author: '1',
+        //                 count: '1'   
+        //             },{
+        //                 id: 2,
+        //                 title: '2',
+        //                 timedate: '2',
+        //                 location: '2',
+        //                 description: '2',
+        //                 author: '2',
+        //                 count: '2'  
+        //             }
+        //         ]
+        // }
+
+
+
+
     }
     handleCancel(){
         this.setState({show: false});

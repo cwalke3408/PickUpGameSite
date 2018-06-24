@@ -45,16 +45,21 @@ class Register extends Component{
         // )
 
         const data = {
-            usrNm: false,
-            pwd: false,
-            email: false
+            Id: 0,
+            username: false,
+            password: false,
+            userdescription: "user description",
+            photolink: "photo link",
+            email: false,
+            // emailperfence: true
         }
 
-        data.usrNm = this.state.userName === "" ? (this.setState({userErr: borderErr}), false) : this.state.userName;
-        data.pwd = (this.state.password === "" || this.state.password !== this.state.passwordCheck) ? (this.setState({passwordErr: borderErr}), false) : this.state.password;
+        data.username = this.state.userName === "" ? (this.setState({userErr: borderErr}), false) : this.state.userName;
+        data.password = (this.state.password === "" || this.state.password !== this.state.passwordCheck) ? (this.setState({passwordErr: borderErr}), false) : this.state.password;
         data.email = this.state.email === "" ? (this.setState({emailErr: borderErr}), false) : this.state.email;
         // console.log(`${data.usrNm}  ${data.pwd}  ${data.email}`);
 
+        console.log(Object.values(data));
         if(Object.values(data).indexOf(false) !== -1){
             console.log("Error in the Form");
             return;
@@ -63,11 +68,10 @@ class Register extends Component{
         }
 
 
-        // axios({
-        //     method: "POST",
-        //     url: "http//:localhost:3030/register",
-        //     data: data
-        // })
+        axios.post("http://localhost:8080/newUser", data)
+            .then((res) => {console.log("res: "); console.log(res);})
+            .catch(function(error) {if (!error.error); });
+
     }
 
 

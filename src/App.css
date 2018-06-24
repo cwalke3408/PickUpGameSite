@@ -58,4 +58,18 @@ body {
     padding: 20px;
     text-align: center; }
 
-/*# sourceMappingURL=App.css.map */
+.FindPickUpBody .mapBody {
+  max-height: 200px; }
+  .FindPickUpBody .mapBody .mapReal {
+    border: 2px navy solid;
+    border-radius: 8px;
+    height: 50% !important;
+    width: 100% !important; }
+.FindPickUpBody .newFeed {
+  position: fixed !important;
+  top: 400px !important;
+  height: 50%;
+  border: 3px red solid;
+  margin-top: 200px !important; }
+
+/*# sourceMappingURL=app.css.map */
