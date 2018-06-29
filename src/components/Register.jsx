@@ -57,19 +57,39 @@ class Register extends Component{
         data.username = this.state.userName === "" ? (this.setState({userErr: borderErr}), false) : this.state.userName;
         data.password = (this.state.password === "" || this.state.password !== this.state.passwordCheck) ? (this.setState({passwordErr: borderErr}), false) : this.state.password;
         data.email = this.state.email === "" ? (this.setState({emailErr: borderErr}), false) : this.state.email;
-        // console.log(`${data.usrNm}  ${data.pwd}  ${data.email}`);
 
-        console.log(Object.values(data));
         if(Object.values(data).indexOf(false) !== -1){
             console.log("Error in the Form");
             return;
-        } else {
-            console.log("Successful Registration")
         }
 
 
+        // 0: Successful Registration
+        // 1: username already exist
+        // 2: Email already exist
+        // 3: username and email exist
         axios.post("http://localhost:8080/newUser", data)
-            .then((res) => {console.log("res: "); console.log(res);})
+            .then((res) => {
+                switch(res.data){
+                    case 0: 
+                        console.log("Succesful Registration");
+                        localStorage.setItem('currUsername', data.username);
+                        this.props.history.push('/');
+                        break;
+                    case 1:
+                        console.log("Sorry!  Username Already Exist")
+                        break;
+                    case 2: 
+                        console.log("Sorry!  Email already exist")
+                        break;
+                    case 3:
+                        console.log("Sorry! Username and Email already exist")
+                        break;
+                    default:
+                        console.log("Sorry! Something is wrong on our end")
+                }
+            
+            })
             .catch(function(error) {if (!error.error); });
 
     }

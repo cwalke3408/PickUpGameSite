@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import apiKey from './key_creds.js';
+
 
 class ModalAdd extends Component{
     constructor(props){
@@ -41,27 +43,44 @@ class ModalAdd extends Component{
 
 
 
-        let data =  {
-            Id: 0,
-            title: this.state.title,
-            timedate: this.state.time,
-            location: this.state.location,
-            description: this.state.description,
-            author: 'abc',
-            count: 1   
-        }
 
-        axios.post("http://localhost:8080/addEvent", data)
-        .then((res) => {console.log("res: "); console.log(res);})
-        .catch(function(error) {if (!error.error); });
+            
+            
+        axios({
+            method: 'get',
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=+${this.state.location}&key=${apiKey}`
+        }).then(geoData => {
+            console.log(geoData.data.results[0].geometry.location)
+
+            let data =  {
+                Id: 0,
+                title: this.state.title,
+                timedate: this.state.time,
+                location: this.state.location,
+                description: this.state.description,
+                author: localStorage.curUsername,
+                count: 1,
+                lat: geoData.data.results[0].geometry.location.lat,
+                lng: geoData.data.results[0].geometry.location.lng
+            }
+
+            axios.post("http://localhost:8080/addEvent", data)
+            .then((res) => {console.log("res: "); console.log(res);})
+            .catch(function(error) {if (!error.error); });
+
+        })
+    
+        
 
 
-        this.setState({
-            time: '',
-            location: '',
-            title: '',
-            description: ''
-        });
+
+
+        // this.setState({
+        //     time: '',
+        //     location: '',
+        //     title: '',
+        //     description: ''
+        // });
     }
 
     handleChange(e){

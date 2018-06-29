@@ -61,15 +61,19 @@ body {
 .FindPickUpBody .mapBody {
   max-height: 200px; }
   .FindPickUpBody .mapBody .mapReal {
-    border: 2px navy solid;
+    border: 2px #0b1724 solid;
     border-radius: 8px;
     height: 50% !important;
     width: 100% !important; }
-.FindPickUpBody .newFeed {
-  position: fixed !important;
-  top: 400px !important;
-  height: 50%;
-  border: 3px red solid;
-  margin-top: 200px !important; }
+.FindPickUpBody .newsFeed {
+  border: 3px #0b1724 solid;
+  border-radius: 8px;
+  background-color: cornsilk;
+  margin-top: 300px !important; }
+  .FindPickUpBody .newsFeed .aEventBox {
+    margin: 20px;
+    padding: 20px;
+    border: 2px #0b1724 solid;
+    border-radius: 8px; }
 
 /*# sourceMappingURL=app.css.map */

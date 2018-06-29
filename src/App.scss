@@ -98,18 +98,28 @@ body{
         max-height: 200px;
 
         .mapReal{
-            border: 2px navy solid;
+            border: 2px $secdary-color solid;
             border-radius: 8px;
             height: 50% !important;
             width: 100% !important;
         }
     }
 
-    .newFeed{
-        position: fixed !important;
-        top: 400px !important;
-        height: 50%;
-        border: 3px red solid;
-        margin-top: 200px !important;
+    .newsFeed{
+        // position: fixed !important;
+        // top: 400px !important;
+        // height: 500px;
+        border: 3px $secdary-color solid;
+        border-radius: 8px;
+        background-color: cornsilk;
+        margin-top: 300px !important;
+
+        .aEventBox{
+            margin: 20px;
+            padding: 20px;
+            border: 2px $secdary-color solid;
+            border-radius: 8px;
+
+        }
     }
 }

@@ -16,19 +16,23 @@ class Login extends Component{
     }
 
     handleClick(){
-        // if(this.state.password === "1234" && this.state.userName === "user"){
-        //     console.log("Success");
-
-        // } else {
-        //     console.log("Failed");
-        // }
         let data = {
             username: this.state.userName,
             password: this.state.password
         }
 
+        
         axios.post("http://localhost:8080/login", data)
-        .then((res) => {console.log("res: "); console.log(res);})
+        .then((res) => {
+            console.log("res: ");
+            console.log(res);
+            if(res.data === "") console.log("Login Failure")
+            else{
+                console.log("Login Success")
+                localStorage.setItem('curUsername', res.data.username)
+                this.props.history.push('/');
+            }
+        })
         .catch(function(error) {if (!error.error); });
 
     }
