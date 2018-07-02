@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 const borderErr = {
     border: '1px red solid'
 }
 const borderDefault = {
-    border: '1px grey solid'
+    // border: '1px grey solid'
 }
 
 class Register extends Component{
@@ -101,24 +103,32 @@ class Register extends Component{
     render(){
         return(
             <div className="loginBody container">
+                <div className="row">
                 <h2>Register</h2>
-                <div className="loginForm">
-                    <h4>User Name</h4>
-                    <input type="text" name="userName" style={this.state.userErr} onChange={(e)=>{this.handleChange(e)}} />
-                    <h4>Password</h4>
-                    <input type="text" name="password" style={this.state.passwordErr} onChange={(e)=>{this.handleChange(e)}}/>
-                    <h4>Re-enter Password</h4>
-                    <input type="text" name="passwordCheck" style={this.state.passwordErr} onChange={(e)=>{this.handleChange(e)}}/>
-                    <h4>Email</h4>
-                    <input type="text" name="email" style={this.state.emailErr} onChange={(e)=>{this.handleChange(e)}}/>
-                    <div className="emailPerfernceBox">
-                        <label>Email Alerts
-                            <input type="checkbox"/>
-                        </label>
+                    <div className="loginForm col-md-offset-2 col-md-8">
+                        <div className="input-group formLine">
+                            <div className="formLabel input-group-addon" id="basic-addon1">
+                                <span className="" >Username</span>
+                            </div>
+                            <input type="text" className="form-control" onChange={(e)=>{this.handleChange(e)}} name="userName" style={this.state.userErr} placeholder="Username" aria-describedby="basic-addon1"/>
+                        </div>
+                        <div className="input-group formLine">
+                            <span className="input-group-addon formLabel" id="basic-addon1">Password</span>
+                            <input type="text" className="form-control" onChange={(e)=>{this.handleChange(e)}} name="password"  style={this.state.passwordErr} placeholder="Password" aria-describedby="basic-addon1"/>
+                        </div>
+                        <div className="input-group formLine">
+                            <span className="input-group-addon" id="basic-addon1">Re-type Password</span>
+                            <input type="text" className="form-control formLabel" onChange={(e)=>{this.handleChange(e)}} name="passwordCheck"  style={this.state.passwordErr} placeholder="Re-type Password" aria-describedby="basic-addon1"/>
+                        </div>
+                        <div className="input-group formLine">
+                            <span className="input-group-addon formLabel" id="basic-addon1">Email</span>
+                            <input type="text" className="form-control" onChange={(e)=>{this.handleChange(e)}} name="email" style={this.state.emailErr} placeholder="Email" aria-describedby="basic-addon1"/>
+                        </div>
+
+                        <button className="btn btn-info btn-block" onClick={()=>{this.handleClick()}}>Submit</button>
                     </div>
-                    <button className="btn btn-info btn-block" onClick={()=>{this.handleClick()}}>Submit</button>
                 </div>
-                <a href="localhost:3000/login">login</a>
+                <h5><Link to="/login">Login</Link></h5>
             </div>
         )
     }

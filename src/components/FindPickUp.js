@@ -95,7 +95,9 @@ class FindPickUp extends Component{
         let allEvents = this.state.eventsList.filter((event) => {
             if(!myAttendingEvents.find((myAEvent)=>{
                 return myAEvent.id === event.id; }))
-                return event; 
+                return event;
+                
+            return null;
         });
 
         let events = allEvents.map((element, index) => {
@@ -124,18 +126,11 @@ class FindPickUp extends Component{
                             
                             </div>
                             <div className="col-sm-3 cardButton">
-                                <button onClick={(e)=>{this.handleAttendClick(element.id)}} className="btn btn-info btn-block cardButton">Attend</button>
+                                <button onClick={()=>{this.handleAttendClick(element.id)}} className="btn btn-info btn-block cardButton">Attend</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                // <div key={key} className="aEventBox">
-                //     <h4>{aEvent.title}</h4>
-                //     <h4>{aEvent.timedata}</h4>
-                //     <h4>{aEvent.location}</h4>
-                //     <h4>{aEvent.description}</h4>
-                //     <button className="btn btn-info" onClick={()=>{this.handleAttendClick(aEvent.id)}}>Attend</button>
-                // </div>
             )
         })
 
@@ -165,20 +160,11 @@ class FindPickUp extends Component{
                         
                         </div>
                         <div className="col-sm-3 cardButton">
-                            <button name={element.id} onClick={(e)=>{this.handleClick(e)}} className="btn btn-danger btn-block cardButton">Cancel</button>
+                            <button name={element.id} onClick={()=>{this.handleCancelClick(element.id)}} className="btn btn-danger btn-block cardButton">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>)
-            // return(
-            //     <div key={key} className="aEventBox">
-            //         <h4>{aEvent.title}</h4>
-            //         <h4>{aEvent.timedata}</h4>
-            //         <h4>{aEvent.location}</h4>
-            //         <h4>{aEvent.description}</h4>
-            //         <button className="btn btn-danger" onClick={()=>{this.handleCancelClick(aEvent.id)}}>Cancel</button>
-            //     </div>
-            // )
         })
 
         return(

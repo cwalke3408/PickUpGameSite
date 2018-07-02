@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MyOwnEvents from './MyOwnEvents';
-import MyAttendingEvents from './MyAttendingEvents';
+// import MyAttendingEvents from './MyAttendingEvents';
 import ModalAdd from './ModalAdd';
 import axios from 'axios';
 

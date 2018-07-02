@@ -28,8 +28,16 @@ body {
   .NavBarBody li a:hover {
     background-color: #111; }
 
+.formLabel {
+  width: 140px; }
+
+.formLine {
+  margin: 10px 0px;
+  width: 100%; }
+
 .loginBody {
-  padding-top: 50px; }
+  padding-top: 50px;
+  text-align: center; }
   .loginBody .loginForm {
     text-align: center;
     background-color: aliceblue;
@@ -37,8 +45,6 @@ body {
     padding: 20px; }
     .loginBody .loginForm h2 {
       padding-top: 0; }
-    .loginBody .loginForm a {
-      display: block; }
 
 .myEventsBody .attendingBody {
   background-color: #0997bb;

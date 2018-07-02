@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Login extends Component{
     constructor(props){
@@ -40,19 +41,27 @@ class Login extends Component{
     render(){
         return(
             <div className="loginBody container">
-                <div className="loginForm">
-                    <h2>Login Page</h2>
-                    
-                    <h4>User Name</h4>
-                    <input onChange={(e)=>{this.handleChange(e)}} name="userName" type="text" />
-                    <h4>Password</h4>
-                    <input onChange={(e)=>{this.handleChange(e)}} name="password" type="text" />
+                <div className="row">
+                    <h2>Login</h2>
+                    <div className="loginForm col-md-offset-2 col-md-8">
+                        <div className="input-group formLine">
+                            <span className="input-group-addon formLabel" id="basic-addon1">Username</span>
+                            <input type="text" class="form-control" onChange={(e)=>{this.handleChange(e)}} name="userName" placeholder="Username" aria-describedby="basic-addon1"/>
+                        </div>
 
-                    <div className="loginButton">
-                        <button className="btn btn-info btn-block" onClick={()=>{this.handleClick()}}>Login</button>
+                        <div className="input-group formLine">
+                            <span className="input-group-addon formLabel" id="basic-addon1">Password</span>
+                            <input type="text" class="form-control" onChange={(e)=>{this.handleChange(e)}} name="password" placeholder="Password" aria-describedby="basic-addon1" />
+                        </div>
+
+                        <br />
+
+                        <div className="loginButton">
+                            <button className="btn btn-info btn-block" onClick={()=>{this.handleClick()}}>Login</button>
+                        </div>
                     </div>
                 </div>
-                <a href="localhost:3000/">Register</a>
+                <h5><Link to="/register">Register</Link></h5>
             </div>
         )
     }

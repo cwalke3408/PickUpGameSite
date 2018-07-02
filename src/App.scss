@@ -50,22 +50,35 @@ body{
     }
 }
 
+.formLabel{
+    width: 140px;
+}
+
+.formLine{
+    margin: 10px 0px;
+    width: 100%;
+}
+
 .loginBody{
     padding-top: 50px;
+    text-align: center;
 
     .loginForm{
         text-align: center;
         background-color: aliceblue;
         border-radius: 8px;
         padding: 20px;
+        // max-width: 500px;
 
         h2{
             padding-top: 0;
         }
 
-        a{
-            display: block;
-        }
+        
+
+        // a{
+        //     display: block;
+        // }
     }
 }
 
