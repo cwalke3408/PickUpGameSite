@@ -6,6 +6,21 @@ $font-statck: Helvetica, sans-serif;
 body{
     background-color: $main-back-color;
     font: $font-statck;
+
+    .headerBox{
+        margin-top: 25px;
+
+        background-color: $secdary-color;
+        border-radius: 8px 8px 0px 0px;
+        color: white;
+        box-shadow: 0px 3px 2px grey;
+        padding: 5px;
+
+        h2{
+            margin: 0px;
+
+        }
+    }
 }
 
 .NavBarBody{
@@ -69,6 +84,84 @@ body{
         }
     }
 
+
+}
+
+.FindPickUpBody{
+
+
+    .mapNews{
+        // position: relative;
+
+        .mapBody{
+            position: relative;
+            height: 325px;
+
+            .mapReal{
+                position: relative;
+                border: 2px $secdary-color solid;
+                border-radius: 4px;
+                height: 100% !important;
+                width: 100%;
+                // border: $primary-color 30px solid;
+            }
+        }
+    }
+
+    .newsFeed{
+        border: 1px $secdary-color solid;
+        border-radius: 0px 0px 8px 8px;
+        background-color: cornsilk;
+        // margin: 10px 0px;
+        // margin-top: 300px !important;
+
+        .aEventBox{
+            background-color: cornsilk;
+            margin: 5px;
+            // padding: 20px;
+            border: 1px $secdary-color solid;
+            box-shadow: 0px 3px 2px grey;
+            border-radius: 8px;
+
+            .textSide{
+                margin: 0;
+                padding: 0;
+
+                .cardTitle{
+                    border-radius: 8px 8px 0px 0px;
+                    // border: 2px solid $secdary-color;
+                    margin: 0px;
+                    padding: 5px;
+                    width: 100%;
+                    background-color: $primary-color;
+                    color: cornsilk;
+
+                }
+            }
+
+            .cardBody{
+                margin-bottom: 5px;
+                padding: 10px !important;
+   
+                .cardText{
+                    p{ padding: 10px; }
+                    .inputGroup{
+                        ::placeholder{
+                            color: $secdary-color;
+                        }
+                    }
+                }           
+            }
+
+            .cardButton{
+                margin-top: 5px;
+                height: 100% !important;
+            }
+
+
+        }
+    }
+
     .modalBackDrop{
         position: fixed;
         top: 0;
@@ -77,49 +170,20 @@ body{
         right: 0;
         background-color: rgba(0,0,0,0.3);
         padding: 0;
-
+        z-index: 10;
+    
         .modalForeDrop{
             position: relative;
             background: white;
             border-radius: 8px;
             max-width: 80%;
             min-height: 40%;
-            margin: 15% auto 0px;
+            margin: 10% auto 0px;
             padding: 20px;
             text-align: center;
-
+    
         }
     }
+
 }
 
-.FindPickUpBody{
-    .mapBody{
-        // border: 2px yellow solid;
-        max-height: 200px;
-
-        .mapReal{
-            border: 2px $secdary-color solid;
-            border-radius: 8px;
-            height: 50% !important;
-            width: 100% !important;
-        }
-    }
-
-    .newsFeed{
-        // position: fixed !important;
-        // top: 400px !important;
-        // height: 500px;
-        border: 3px $secdary-color solid;
-        border-radius: 8px;
-        background-color: cornsilk;
-        margin-top: 300px !important;
-
-        .aEventBox{
-            margin: 20px;
-            padding: 20px;
-            border: 2px $secdary-color solid;
-            border-radius: 8px;
-
-        }
-    }
-}

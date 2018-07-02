@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import apiKey from './key_creds.js';
+import DatePicker from 'react-date-picker';
 
 
 class ModalAdd extends Component{
@@ -9,9 +10,13 @@ class ModalAdd extends Component{
 
         this.state = {
             time: "",
+            city: "",
+            loc_state: "",
+            address: "",
             location: '',
             title: '',
-            description: ''
+            description: '',
+            date: ""
         }
 
     }
@@ -22,14 +27,22 @@ class ModalAdd extends Component{
     }
     handleSubmit(e){
         let newEventEntry = {
+            city: false,
+            loc_state: false,
+            address: false,
+            date: false,
             time: false,
-            location: false,
             title: false,
             description: false
         }
 
+
+        // Validation
+        newEventEntry.city = this.state.city === "" ? (false) : this.state.city;
+        newEventEntry.loc_state = this.state.loc_state === "" ? (false) : this.state.loc_state;
+        newEventEntry.address = this.state.address === "" ? (false) : this.state.address;
         newEventEntry.time = this.state.time === "" ? (false) : this.state.time;
-        newEventEntry.location = this.state.location === '' ? (false) : this.state.location;
+        newEventEntry.date = this.state.date === "" ? (false) : this.state.date;
         newEventEntry.title = this.state.title === '' ? (false) : this.state.title;
         newEventEntry.description = this.state.description === '' ? (false) : this.state.description;
 
@@ -38,54 +51,63 @@ class ModalAdd extends Component{
             return;
         }
 
+        let dateSplited = this.state.date.toString().split(' ');
+        let theDate = dateSplited.splice(0, 4).join(' ');
+        let location =  newEventEntry.address +","+newEventEntry.city +","+ newEventEntry.loc_state;
         this.props.listEvent.push(newEventEntry);
         this.props.onSubmit();
 
-
-
-
-            
-            
+ 
         axios({
             method: 'get',
-            url: `https://maps.googleapis.com/maps/api/geocode/json?address=+${this.state.location}&key=${apiKey}`
+            url: `https://maps.googleapis.com/maps/api/geocode/json?address=+${location}&key=${apiKey}`
         }).then(geoData => {
             console.log(geoData.data.results[0].geometry.location)
 
             let data =  {
                 Id: 0,
-                title: this.state.title,
-                timedate: this.state.time,
-                location: this.state.location,
-                description: this.state.description,
+                title: newEventEntry.title,
+                timedate: newEventEntry.time,
+                date: theDate,
+                location: location,
+                description: newEventEntry.description,
                 author: localStorage.curUsername,
                 count: 1,
                 lat: geoData.data.results[0].geometry.location.lat,
                 lng: geoData.data.results[0].geometry.location.lng
             }
 
+
             axios.post("http://localhost:8080/addEvent", data)
-            .then((res) => {console.log("res: "); console.log(res);})
+            .then((res) => {
+                // console.log("res: "); 
+                // console.log(res.data.ownEvents);
+                this.props.onListChange(res.data.ownEvents);
+            })
             .catch(function(error) {if (!error.error); });
-
         })
-    
-        
 
-
-
-
-        // this.setState({
-        //     time: '',
-        //     location: '',
-        //     title: '',
-        //     description: ''
-        // });
+        // Clear State variables
+        this.setState({
+            title: "",
+            city: "",
+            loc_state: "",
+            address: "",
+            date: "",
+            time: "",
+            description: ""
+        })
     }
 
     handleChange(e){
         this.setState({[e.target.name]: e.target.value});
     }
+
+    handleListChange(val){
+        this.props.onListChange(val);
+    }
+
+    onChange = date => this.setState({ date })
 
     render(){
         if(!this.props.show) return null;
@@ -95,17 +117,52 @@ class ModalAdd extends Component{
                 <div className="modalForeDrop">
                     <h1>Modal</h1>
 
-                    <h3>Event Title</h3>      
-                    <input onChange={(e)=>{this.handleChange(e)}} name="title" type="text" />             
-                    <h3>Address of Event</h3>                   
-                    <input onChange={(e)=>{this.handleChange(e)}} name="location" type="text" />
-                    <h3>Date</h3>                  
-                    <input onChange={(e)=>{this.handleChange(e)}} name="time" type="text" />
-                    <h3>Description</h3>                   
-                    <input onChange={(e)=>{this.handleChange(e)}} name="description" type="text" />
+                    <div className="form-group">
+                        <label>Event Title</label>      
+                        <input onChange={(e)=>{this.handleChange(e)}} name="title" className="form-control" type="text" />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Address of Event</label>                   
+                        <input onChange={(e)=>{this.handleChange(e)}} name="address" className="form-control" type="text" />
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group col-md-9">
+                            <label>City</label>
+                            <input onChange={(e)=>{this.handleChange(e)}} name="city" className="form-control" type="text" />    
+                        </div>
+                    
+                        <div className="form-group col-md-3">
+                            <label>State</label>
+                            <input onChange={(e)=>{this.handleChange(e)}} name="loc_state" className="form-control" type="text" />             
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label>Time</label>
+                            <input onChange={(e)=>{this.handleChange(e)}} name="time" className="form-control" type="text" />
+                        </div>
+                        
+                        <div className='form-group date col-md-6'>
+                            <label>Date</label>                  
+                            <DatePicker
+                                onChange={this.onChange}
+                                value={this.state.date}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Description</label>                   
+                        <input onChange={(e)=>{this.handleChange(e)}} name="description" className="form-control" type="text" />
+                    </div>
+
+                    <button name="Submit" onClick={(e)=>{this.handleSubmit(e)}} className="btn btn-success">Submit</button>
+                    <button name="cancel" onClick={(e)=>{this.handleCancel(e)}} className="btn btn-warning">Cancel</button>                
+                
                 </div>
-                <button name="Submit" onClick={(e)=>{this.handleSubmit(e)}} className="btn btn-success">Submit</button>
-                <button name="cancel" onClick={(e)=>{this.handleCancel(e)}} className="btn btn-warning">Cancel</button>
             </div>
         )
     }

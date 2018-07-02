@@ -1,6 +1,15 @@
 body {
   background-color: #cde0fc;
   font: Helvetica, sans-serif; }
+  body .headerBox {
+    margin-top: 25px;
+    background-color: #0b1724;
+    border-radius: 8px 8px 0px 0px;
+    color: white;
+    box-shadow: 0px 3px 2px grey;
+    padding: 5px; }
+    body .headerBox h2 {
+      margin: 0px; }
 
 .NavBarBody ul {
   list-style-type: none;
@@ -40,40 +49,63 @@ body {
     border-radius: 4px;
     color: #0b1724;
     background-color: aliceblue; }
-.myEventsBody .modalBackDrop {
+
+.FindPickUpBody .mapNews .mapBody {
+  position: relative;
+  height: 325px; }
+  .FindPickUpBody .mapNews .mapBody .mapReal {
+    position: relative;
+    border: 2px #0b1724 solid;
+    border-radius: 4px;
+    height: 100% !important;
+    width: 100%; }
+.FindPickUpBody .newsFeed {
+  border: 1px #0b1724 solid;
+  border-radius: 0px 0px 8px 8px;
+  background-color: cornsilk; }
+  .FindPickUpBody .newsFeed .aEventBox {
+    background-color: cornsilk;
+    margin: 5px;
+    border: 1px #0b1724 solid;
+    box-shadow: 0px 3px 2px grey;
+    border-radius: 8px; }
+    .FindPickUpBody .newsFeed .aEventBox .textSide {
+      margin: 0;
+      padding: 0; }
+      .FindPickUpBody .newsFeed .aEventBox .textSide .cardTitle {
+        border-radius: 8px 8px 0px 0px;
+        margin: 0px;
+        padding: 5px;
+        width: 100%;
+        background-color: #0997bb;
+        color: cornsilk; }
+    .FindPickUpBody .newsFeed .aEventBox .cardBody {
+      margin-bottom: 5px;
+      padding: 10px !important; }
+      .FindPickUpBody .newsFeed .aEventBox .cardBody .cardText p {
+        padding: 10px; }
+      .FindPickUpBody .newsFeed .aEventBox .cardBody .cardText .inputGroup ::placeholder {
+        color: #0b1724; }
+    .FindPickUpBody .newsFeed .aEventBox .cardButton {
+      margin-top: 5px;
+      height: 100% !important; }
+.FindPickUpBody .modalBackDrop {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  padding: 0; }
-  .myEventsBody .modalBackDrop .modalForeDrop {
+  padding: 0;
+  z-index: 10; }
+  .FindPickUpBody .modalBackDrop .modalForeDrop {
     position: relative;
     background: white;
     border-radius: 8px;
     max-width: 80%;
     min-height: 40%;
-    margin: 15% auto 0px;
+    margin: 10% auto 0px;
     padding: 20px;
     text-align: center; }
-
-.FindPickUpBody .mapBody {
-  max-height: 200px; }
-  .FindPickUpBody .mapBody .mapReal {
-    border: 2px #0b1724 solid;
-    border-radius: 8px;
-    height: 50% !important;
-    width: 100% !important; }
-.FindPickUpBody .newsFeed {
-  border: 3px #0b1724 solid;
-  border-radius: 8px;
-  background-color: cornsilk;
-  margin-top: 300px !important; }
-  .FindPickUpBody .newsFeed .aEventBox {
-    margin: 20px;
-    padding: 20px;
-    border: 2px #0b1724 solid;
-    border-radius: 8px; }
 
 /*# sourceMappingURL=app.css.map */

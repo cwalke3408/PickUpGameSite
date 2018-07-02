@@ -48,7 +48,7 @@ class GoogleMap extends Component {
 
         return(
             
-        <div style={mapStyle} className="mapBody container">
+        <div style={mapStyle} className="mapBody">
             {/* DISPLAY THE MAP */}
             
             <Map className="mapReal"

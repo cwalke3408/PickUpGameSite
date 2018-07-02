@@ -12,10 +12,10 @@ class MyAttendingEvents extends Component{
     handleCancelClick(eventId){
         // Delete from Attedning List
 
-        let data = {
-            username: localStorage.curUsername,
-            id: eventId
-        }
+        // let data = {
+        //     username: localStorage.curUsername,
+        //     id: eventId
+        // }
 
         // axios.post("http://localhost:8080/cancelAttend", data)
         //     .then((res) => {

@@ -13,15 +13,17 @@ class FindPickUp extends Component{
     }
 
     componentDidMount(){
+        console.log(this.props.route);
+        
         if(localStorage.curUsername !== ""){
-            console.log(localStorage.curUsername);
+            // console.log(localStorage.curUsername);
             let data = {
                 username: localStorage.curUsername
             }
     
             axios.post("http://localhost:8080/userEvents", data)
                 .then((res) => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     this.setState({myAttendingEvents: res.data.attendingEvents})
                 })
                 .catch(function(error){if (!error.error); })
@@ -43,7 +45,7 @@ class FindPickUp extends Component{
             })
             .catch(function(error){if(!error.error);})
 
-        console.log(localStorage.currUsername);
+        // console.log(localStorage.currUsername);
 
 
     }
@@ -51,6 +53,12 @@ class FindPickUp extends Component{
 
 
     handleAttendClick(eventId){
+
+        if(localStorage.curUsername === ""){
+            console.log("Please Sign In");
+            return;
+        }
+
         let data = {
             username: localStorage.curUsername,
             id: eventId
@@ -58,8 +66,8 @@ class FindPickUp extends Component{
 
         axios.post("http://localhost:8080/attendEvent", data)
             .then((res) => {
-                console.log("=== After Attedning ===");
-                console.log(res);
+                // console.log("=== After Attedning ===");
+                // console.log(res);
                 this.setState({myAttendingEvents: res.data})
             })
             .catch(function(error){if(!error.error);})
@@ -75,8 +83,8 @@ class FindPickUp extends Component{
 
         axios.post("http://localhost:8080/cancelAttend", data)
             .then((res) => {
-                console.log("=== After Cancel ===")
-                console.log(res);
+                // console.log("=== After Cancel ===")
+                // console.log(res);
                 this.setState({myAttendingEvents: res.data})
             }).catch(function(error){if(!error.error);})
     }
@@ -90,46 +98,112 @@ class FindPickUp extends Component{
                 return event; 
         });
 
-        let events = allEvents.map((aEvent, key) => {
+        let events = allEvents.map((element, index) => {
             return(
-                <div key={key} className="aEventBox">
-                    <h4>{aEvent.title}</h4>
-                    <h4>{aEvent.timedata}</h4>
-                    <h4>{aEvent.location}</h4>
-                    <h4>{aEvent.description}</h4>
-                    <button className="btn btn-info" onClick={()=>{this.handleAttendClick(aEvent.id)}}>Attend</button>
+                <div key={index} className="aEventBox card" >
+                    <div className="card-header textSide">
+                        <h3 className="cardTitle">{element.title}</h3>
+                    </div>
+                    <div className="card-body">
+                        <div className="row cardBody">
+                            <div className="col-sm-9 cardText">
+                                <p>{element.description}</p>
+                                {/* <h4>{element.location}</h4> */}
+
+                                <div className="input-group inputGroup">
+                                    <span className="input-group-addon glyphicon glyphicon-map-marker"> </span>
+                                    <input className="form-control" placeholder={element.location} type="text" readOnly/>
+                                    {/* <h5>{element.date}</h5> */}
+                                </div>
+                                
+                                <div className="input-group inputGroup">
+                                    <span className="input-group-addon glyphicon glyphicon-hourglass"></span>
+                                    <input className="form-control" placeholder={element.date} type="text" readOnly/>
+                                    <input className="form-control" placeholder={element.timedate} type="text" readOnly/>
+                                </div>
+                            
+                            </div>
+                            <div className="col-sm-3 cardButton">
+                                <button onClick={(e)=>{this.handleAttendClick(element.id)}} className="btn btn-info btn-block cardButton">Attend</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                // <div key={key} className="aEventBox">
+                //     <h4>{aEvent.title}</h4>
+                //     <h4>{aEvent.timedata}</h4>
+                //     <h4>{aEvent.location}</h4>
+                //     <h4>{aEvent.description}</h4>
+                //     <button className="btn btn-info" onClick={()=>{this.handleAttendClick(aEvent.id)}}>Attend</button>
+                // </div>
             )
         })
 
-        let attending = myAttendingEvents.map((aEvent, key) => {
-            return(
-                <div key={key} className="aEventBox">
-                    <h4>{aEvent.title}</h4>
-                    <h4>{aEvent.timedata}</h4>
-                    <h4>{aEvent.location}</h4>
-                    <h4>{aEvent.description}</h4>
-                    <button className="btn btn-danger" onClick={()=>{this.handleCancelClick(aEvent.id)}}>Cancel</button>
+        let attending = myAttendingEvents.map((element, index) => {
+            return(  
+            <div key={index} className="aEventBox card" >
+                <div className="card-header textSide">
+                    <h3 className="cardTitle">{element.title}</h3>
                 </div>
-            )
+                <div className="card-body">
+                    <div className="row cardBody">
+                        <div className="col-sm-9 cardText">
+                            <p>{element.description}</p>
+                            {/* <h4>{element.location}</h4> */}
+
+                            <div className="input-group inputGroup">
+                                <span className="input-group-addon glyphicon glyphicon-map-marker"> </span>
+                                <input className="form-control" placeholder={element.location} type="text" readOnly/>
+                                {/* <h5>{element.date}</h5> */}
+                            </div>
+                            
+                            <div className="input-group inputGroup">
+                                <span className="input-group-addon glyphicon glyphicon-hourglass"></span>
+                                <input className="form-control" placeholder={element.date} type="text" readOnly/>
+                                <input className="form-control" placeholder={element.timedate} type="text" readOnly/>
+                            </div>
+                        
+                        </div>
+                        <div className="col-sm-3 cardButton">
+                            <button name={element.id} onClick={(e)=>{this.handleClick(e)}} className="btn btn-danger btn-block cardButton">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>)
+            // return(
+            //     <div key={key} className="aEventBox">
+            //         <h4>{aEvent.title}</h4>
+            //         <h4>{aEvent.timedata}</h4>
+            //         <h4>{aEvent.location}</h4>
+            //         <h4>{aEvent.description}</h4>
+            //         <button className="btn btn-danger" onClick={()=>{this.handleCancelClick(aEvent.id)}}>Cancel</button>
+            //     </div>
+            // )
         })
 
         return(
             <div className="FindPickUpBody container">
                 <div className="mapNews">
-                    <h2>MAPPP </h2>
+                    <div className="headerBox">
+                        <h2>MAPPP </h2>
+                    </div>
                     <GoogleMap 
                         events={this.state.eventsList}
                         myEvents={this.state.myAttendingEvents}
                     />
                 </div>
+
+                <div className="headerBox">
+                    <h2>FindPickUp Body</h2>
+                </div>
                 <div className="newsFeed">
-                    <h1>FindPickUp Body</h1>
                     {events}
                 </div>
 
+                <div className="headerBox">
+                    <h2>What I'm attending</h2>
+                </div>
                 <div className="newsFeed" >
-                    <h1>What I'm attending</h1>
                     {attending}
                 </div>
             </div>

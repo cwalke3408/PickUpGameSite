@@ -21,6 +21,8 @@ class Register extends Component{
             passwordErr: borderDefault,
             emailErr: borderDefault
         }
+
+        console.log("Try Out Input Group")
     }
 
     handleChange(e){
@@ -28,7 +30,7 @@ class Register extends Component{
         
         const userErr = e.target.name === 'userName' ? borderDefault : this.state.userErr;
         const passwordErr = e.target.name === 'password' ? borderDefault : this.state.passwordErr;
-        const passwordCheckErr = e.target.name === 'passwordCheck' ? borderDefault : borderErr;
+        // const passwordCheckErr = e.target.name === 'passwordCheck' ? borderDefault : borderErr;
         const emailErr = e.target.name === 'email' ? borderDefault : this.state.emailErr;
 
         this.setState({
@@ -73,7 +75,7 @@ class Register extends Component{
                 switch(res.data){
                     case 0: 
                         console.log("Succesful Registration");
-                        localStorage.setItem('currUsername', data.username);
+                        localStorage.setItem('curUsername', data.username);
                         this.props.history.push('/');
                         break;
                     case 1:

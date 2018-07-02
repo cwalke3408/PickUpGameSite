@@ -13,20 +13,22 @@ class MyEvents extends Component{
             myAttendingEvents: [],
             show: false
         }
+
+        this.handleListChange = this.handleListChange.bind(this);
     }
 
     componentDidMount(){
 
-        console.log(localStorage.curUsername);
+        // console.log(localStorage.curUsername);
         let data = {
             username: localStorage.curUsername
         }
 
         axios.post("http://localhost:8080/userEvents", data)
             .then((res) => {
-                console.log(res)
-                console.log(this.props.history);
-                console.log(localStorage);
+                console.log(res.data)
+                // console.log(this.props.history);
+                // console.log(localStorage);
                 this.setState({
                     myOwnEvents: res.data.ownEvents,
                     myAttendingEvents: res.data.attendingEvents
@@ -47,18 +49,30 @@ class MyEvents extends Component{
 
         axios.post("http://localhost:8080/cancelAttend", data)
             .then((res) => {
-                console.log("=== After Cancel ===")
-                console.log(res);
+                // console.log("=== After Cancel ===")
+                // console.log(res);
                 this.setState({myAttendingEvents: res.data})
             }).catch(function(error){if(!error.error);})
     }
 
     handleDeleteClick(e){
-        let eventsList = this.state.myOwnEvents;
-        eventsList.splice(e.target.name,1);
-        this.setState({
-            myOwnEvents: eventsList
-        })
+        let data = {
+            username: localStorage.curUsername,
+            id: e.target.name
+        }
+
+        axios.post("http://localhost:8080/deleteEvent", data)
+            .then((res) => {
+                // console.log(res)
+                this.setState({
+                    myOwnEvents: res.data.ownEvents,
+                    myAttendingEvents: res.data.attendingEvents
+                })
+            }).catch(function(error){if(!error.error);})
+        // eventsList.splice(e.target.name,1);
+        // this.setState({
+        //     myOwnEvents: eventsList
+        // })
     }
 
     handleSubmit(){
@@ -68,34 +82,82 @@ class MyEvents extends Component{
         this.setState({show: false});
     }
 
+    handleListChange(listOfOwnEvents){
+        this.setState({myOwnEvents: listOfOwnEvents});
+    }
+
     render(){
         let table = this.state.myAttendingEvents.map((element, index) => {
-            return <div key={index} className="attendingElement" >
-                <h3>{element.title}</h3>
-                <p>{element.description}</p>
-                <h4>{element.location}</h4>
-                <h4>{element.time}</h4>
-                <button className="btn btn-danger" onClick={()=>{this.handleCancelClick(element.id)}}>Cancel</button>
+
+            return  <div key={index} className="aEventBox card" >
+            <div className="card-header textSide">
+                <h3 className="cardTitle">{element.title}</h3>
             </div>
+            <div className="card-body">
+                <div className="row cardBody">
+                    <div className="col-sm-9 cardText">
+                        <p>{element.description}</p>
+                        {/* <h4>{element.location}</h4> */}
+
+                        <div className="input-group inputGroup">
+                            <span className="input-group-addon glyphicon glyphicon-map-marker"> </span>
+                            <input className="form-control" placeholder={element.location} type="text" readOnly/>
+                            {/* <h5>{element.date}</h5> */}
+                        </div>
+                        
+                        <div className="input-group inputGroup">
+                            <span className="input-group-addon glyphicon glyphicon-hourglass"></span>
+                            <input className="form-control" placeholder={element.date} type="text" readOnly/>
+                            <input className="form-control" placeholder={element.timedate} type="text" readOnly/>
+                        </div>
+                    
+                    </div>
+                    <div className="col-sm-3 cardButton">
+                        <button name={element.id} onClick={(e)=>{this.handleClick(e)}} className="btn btn-danger btn-block cardButton">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            // return <div key={index} className="card aEventBox row" >
+            //     <div className="col-sm-9 textSide">
+            //         <div className="card-header">
+            //             <h3 className="card-title cardTitle">{element.title}</h3>
+            //         </div>
+            //         <p>{element.description}</p>
+            //         <h4>{element.location}</h4>
+            //         <h4>{element.time}</h4>
+            //     </div>
+            //     <div className="cardButton col-sm-3">
+            //         <button className="btn btn-danger" onClick={()=>{this.handleCancelClick(element.id)}}>Cancel</button>
+            //     </div>
+            // </div>
         });
 
         return(
-            <div className="myEventsBody container">
+            <div className="FindPickUpBody container">
                 <ModalAdd
                     show={this.state.show} 
                     listEvent={this.state.myOwnEvents}
                     onCancel={()=>{this.handleCancel()}}
                     onSubmit={()=>{this.handleSubmit()}}
+                    onListChange={this.handleListChange}    
                 />
 
-                <h2>My Events</h2>
+                <div className="headerBox">
+                    <h2>My Events</h2>
+                </div>
                 
                 <MyOwnEvents
                     myEvents={this.state.myOwnEvents} 
-                    onDeleteClick={(e)=>{this.handleDeleteClick(e)}}    
+                    onDeleteClick={(e)=>{this.handleDeleteClick(e)}}
                 />
-                <button onClick={(e)=>{this.handleAddClick(e)}} className="btn btn-info">Add Event</button>
-                <div className="attendingBody">
+                <button onClick={(e)=>{this.handleAddClick(e)}} className="btn btn-info btn-block">Add Event</button>
+
+                <div className="headerBox">
+                    <h2>Attending Events</h2>
+                </div>
+                <div className="newsFeed">
                     {table}
                 </div>
             </div>
