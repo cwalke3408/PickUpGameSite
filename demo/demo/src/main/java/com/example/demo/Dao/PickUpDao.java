@@ -4,6 +4,7 @@ import com.example.demo.Modal.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,6 +12,9 @@ import java.util.List;
 
 @Component
 public class PickUpDao {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -41,24 +45,23 @@ public class PickUpDao {
             return 2;
         }
 
-        System.out.println("Dao: "+ userModel.getUsername()+ " " +userModel.getPassword() + " "+ userModel.getEmail());
         String SQL = "INSERT into usermaster values(?,?,?,?,?,?)";
-        jdbcTemplate.update(SQL,userModel.getId(), userModel.getUsername(), userModel.getPassword(), userModel.getUserdescription(), userModel.getPhotolink(), userModel.getEmail());
+        jdbcTemplate.update(SQL,userModel.getId(), userModel.getUsername(),  passwordAuth(userModel.getPassword()), userModel.getUserdescription(), userModel.getPhotolink(), userModel.getEmail());
 
         return 0;
     }
 
+    public String passwordAuth(String password){
+        return passwordEncoder.encode(password);
+    }
+
     public UserInfoModel checkLoginDao(LoginModel loginModel){
 
-        // SELECT id FROM usermaster WHERE username = 'abc' AND password = '123'
-        String sql = "SELECT * FROM usermaster WHERE username = '"+ loginModel.getUsername()+ "' AND password = '" + loginModel.getPassword()+ "'";
+        String sql = "SELECT * FROM usermaster WHERE username = '"+ loginModel.getUsername()+ "'";
         List<UserInfoModel> m = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(UserInfoModel.class));
 
-        // Return 1 (VALID credentials)  Return 0 (INVALID credentials)
-        if(m.size() == 1){
+        if(m.size() == 1 && passwordEncoder.matches(loginModel.getPassword(), m.get(0).getPassword())) {
             return m.get(0);
-        } else if(m.size() == 0){
-            return null;
         }
 
         return null;
@@ -77,41 +80,6 @@ public class PickUpDao {
         String sql = "INSERT INTO events values(?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, eventList.getId(), eventList.getTitle(), eventList.getTimedate(), eventList.getDate(), eventList.getLocation(), eventList.getLat(), eventList.getLng(), eventList.getDescription(), eventList.getAuthor(), eventList.getCount());
         return myEventsOwn(eventList.getAuthor());
-
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        System.out.println(keyHolder.getKey());
-//        int key = jdbcTemplate.update(
-//                //sql, eventList.getId(), eventList.getTitle(), eventList.getTimedate(), eventList.getDate(), eventList.getLocation(), eventList.getLat(), eventList.getLng(), eventList.getDescription(), eventList.getAuthor(), eventList.getCount());
-//                new PreparedStatementCreator() {
-//                    @Override
-//                    public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-//                        PreparedStatement ps = connection.prepareStatement(sql, new String[] {"id"});
-//                        System.out.println(Statement.RETURN_GENERATED_KEYS);
-//                        ps.setInt(1, Statement.RETURN_GENERATED_KEYS);
-//                        ps.setString(2, eventList.getTitle());
-//                        ps.setString(3, eventList.getTimedate());
-//                        ps.setString(4, eventList.getDate());
-//                        ps.setString(5, eventList.getLocation());
-//                        ps.setString(6, eventList.getLat());
-//                        ps.setString(7, eventList.getLng());
-//                        ps.setString(8, eventList.getDescription());
-//                        ps.setString(9, eventList.getAuthor());
-//                        ps.setInt(10, eventList.getCount());
-//
-//                        return ps;
-//                    }
-//                },
-//                keyHolder
-//        );
-//        System.out.println(keyHolder.getKey());
-//        System.out.println(key);
-//        return 1;
-        //        SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-//
-//        Integer userId = getUserId(eventList.getAuthor());
-//        System.out.println("UserId: " + userId);
-//
-//        addAttending(new AttendingModal(userId, 1, eventList.getAuthor()));
     }
 
     public MyEvents myEventsOwn(String author){

@@ -8,7 +8,8 @@ class Login extends Component{
 
         this.state= {
             userName: '',
-            password: ''
+            password: '',
+            alert: false
         }
     }
 
@@ -25,33 +26,44 @@ class Login extends Component{
         
         axios.post("http://localhost:8080/login", data)
         .then((res) => {
-            console.log("res: ");
-            console.log(res);
-            if(res.data === "") console.log("Login Failure")
-            else{
-                console.log("Login Success")
+            if(res.data === ""){
+                this.setState({
+                    password: '',
+                    alert: true
+                });
+             } else {
                 localStorage.setItem('curUsername', res.data.username)
                 this.props.history.push('/');
             }
         })
-        .catch(function(error) {if (!error.error); });
+        .catch(function(error) {if (!error.error) console.log("server error")});
 
     }
 
     render(){
+
+        let alertDiv = this.state.alert ? 
+            (<div className="alert alert-danger" role="alert">
+                Invalid Username or Password!!
+            </div>) : null;
+
+
         return(
             <div className="loginBody container">
                 <div className="row">
                     <h2>Login</h2>
+
+                    {alertDiv}
+
                     <div className="loginForm col-md-offset-2 col-md-8">
                         <div className="input-group formLine">
                             <span className="input-group-addon formLabel" id="basic-addon1">Username</span>
-                            <input type="text" class="form-control" onChange={(e)=>{this.handleChange(e)}} name="userName" placeholder="Username" aria-describedby="basic-addon1"/>
+                            <input type="text" className="form-control" onChange={(e)=>{this.handleChange(e)}} name="userName" placeholder="Username" aria-describedby="basic-addon1"/>
                         </div>
 
                         <div className="input-group formLine">
                             <span className="input-group-addon formLabel" id="basic-addon1">Password</span>
-                            <input type="text" class="form-control" onChange={(e)=>{this.handleChange(e)}} name="password" placeholder="Password" aria-describedby="basic-addon1" />
+                            <input type="password" className="form-control" onChange={(e)=>{this.handleChange(e)}} name="password" placeholder="Password" aria-describedby="basic-addon1" />
                         </div>
 
                         <br />

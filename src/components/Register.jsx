@@ -21,10 +21,9 @@ class Register extends Component{
             emailPerfence: false,
             userErr: borderDefault,
             passwordErr: borderDefault,
-            emailErr: borderDefault
+            emailErr: borderDefault,
+            alert: ''
         }
-
-        console.log("Try Out Input Group")
     }
 
     handleChange(e){
@@ -44,10 +43,6 @@ class Register extends Component{
     }
 
     handleClick(){
-        // console.log(
-        //     `${this.state.userName}\n${this.state.password}\n${this.state.passwordCheck}\n${this.state.email}\n`
-        // )
-
         const data = {
             Id: 0,
             username: false,
@@ -55,7 +50,6 @@ class Register extends Component{
             userdescription: "user description",
             photolink: "photo link",
             email: false,
-            // emailperfence: true
         }
 
         data.username = this.state.userName === "" ? (this.setState({userErr: borderErr}), false) : this.state.userName;
@@ -76,21 +70,20 @@ class Register extends Component{
             .then((res) => {
                 switch(res.data){
                     case 0: 
-                        console.log("Succesful Registration");
                         localStorage.setItem('curUsername', data.username);
                         this.props.history.push('/');
                         break;
                     case 1:
-                        console.log("Sorry!  Username Already Exist")
+                        this.setState({alert: "Sorry!  Username Already Exist"})
                         break;
                     case 2: 
-                        console.log("Sorry!  Email already exist")
+                        this.setState({alert: "Sorry!  Email already exist"})
                         break;
                     case 3:
-                        console.log("Sorry! Username and Email already exist")
+                        this.setState({alert: "Sorry! Username and Email already exist"})
                         break;
                     default:
-                        console.log("Sorry! Something is wrong on our end")
+                        this.setState({alert: "Sorry! Something is wrong on our end"})
                 }
             
             })
@@ -101,10 +94,18 @@ class Register extends Component{
 
 
     render(){
+        let alertDiv = this.state.alert !== '' ? 
+        (<div className="alert alert-danger" role="alert">
+            {this.state.alert}
+        </div>) : null;
+
         return(
             <div className="loginBody container">
                 <div className="row">
-                <h2>Register</h2>
+                    <h2>Register</h2>
+
+                    {alertDiv}
+
                     <div className="loginForm col-md-offset-2 col-md-8">
                         <div className="input-group formLine">
                             <div className="formLabel input-group-addon" id="basic-addon1">
@@ -114,11 +115,11 @@ class Register extends Component{
                         </div>
                         <div className="input-group formLine">
                             <span className="input-group-addon formLabel" id="basic-addon1">Password</span>
-                            <input type="text" className="form-control" onChange={(e)=>{this.handleChange(e)}} name="password"  style={this.state.passwordErr} placeholder="Password" aria-describedby="basic-addon1"/>
+                            <input type="password" className="form-control" onChange={(e)=>{this.handleChange(e)}} name="password"  style={this.state.passwordErr} placeholder="Password" aria-describedby="basic-addon1"/>
                         </div>
                         <div className="input-group formLine">
                             <span className="input-group-addon" id="basic-addon1">Re-type Password</span>
-                            <input type="text" className="form-control formLabel" onChange={(e)=>{this.handleChange(e)}} name="passwordCheck"  style={this.state.passwordErr} placeholder="Re-type Password" aria-describedby="basic-addon1"/>
+                            <input type="password" className="form-control formLabel" onChange={(e)=>{this.handleChange(e)}} name="passwordCheck"  style={this.state.passwordErr} placeholder="Re-type Password" aria-describedby="basic-addon1"/>
                         </div>
                         <div className="input-group formLine">
                             <span className="input-group-addon formLabel" id="basic-addon1">Email</span>
