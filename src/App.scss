@@ -50,6 +50,73 @@ body{
     }
 }
 
+.gm-style .gm-style-iw {
+    // background-color: #3C61AD !important;
+    border-radius: 8px;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 120px !important;
+    display: block !important;
+    opacity: 1;
+ } 
+
+/*style the p tag*/
+.gm-style .gm-style-iw #google-popup p{
+   padding: 10px;
+}
+
+.gm-style div div div div div div div div {
+    background-color: rgba(255, 255, 255, 0);
+    > div {
+        background-color: rgba(255, 255, 255, 0) !important;
+    }
+}
+
+.gm-style div div div div div div div div div{
+    background-color: $main-back-color;
+    padding: 0;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    color: black;
+    font-size: 16px;
+}
+
+.gm-style-iw{
+    background-color: $main-back-color !important;
+    border-radius: 8px;
+    box-shadow:  5px 5px 10px 1px $secdary-color;
+    color: $secdary-color !important;
+
+    > div{
+        > div {
+            overflow: hidden !important;
+        }
+    }
+}
+
+.infoOuter{
+    // position: relative;
+    // background-color: green !important;
+    // width: 100% !important;
+    // text-align: left;
+    // max-width: 300px;
+
+    .infoTitle{
+        background-color: $secdary-color !important;
+        color: $primary-color;
+        h5{
+            padding: 2px;
+            margin: 0 !important;
+        }
+        p{
+            background-color: #111 !important;
+        }
+    }
+}
+
 .formLabel{
     width: 140px;
 }

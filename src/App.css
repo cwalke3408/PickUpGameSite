@@ -28,6 +28,51 @@ body {
   .NavBarBody li a:hover {
     background-color: #111; }
 
+.gm-style .gm-style-iw {
+  border-radius: 8px;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 120px !important;
+  display: block !important;
+  opacity: 1; }
+
+/*style the p tag*/
+.gm-style .gm-style-iw #google-popup p {
+  padding: 10px; }
+
+.gm-style div div div div div div div div {
+  background-color: rgba(255, 255, 255, 0); }
+  .gm-style div div div div div div div div > div {
+    background-color: rgba(255, 255, 255, 0) !important; }
+
+.gm-style div div div div div div div div div {
+  background-color: #cde0fc;
+  padding: 0;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  color: black;
+  font-size: 16px; }
+
+.gm-style-iw {
+  background-color: #cde0fc !important;
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px 1px #0b1724;
+  color: #0b1724 !important; }
+  .gm-style-iw > div > div {
+    overflow: hidden !important; }
+
+.infoOuter .infoTitle {
+  background-color: #0b1724 !important;
+  color: #0997bb; }
+  .infoOuter .infoTitle h5 {
+    padding: 2px;
+    margin: 0 !important; }
+  .infoOuter .infoTitle p {
+    background-color: #111 !important; }
+
 .formLabel {
   width: 140px; }
 

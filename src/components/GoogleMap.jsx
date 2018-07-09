@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
-// import axios from 'axios';s
-import apiKey from './key_creds.js'
+import apiKey from './key_creds.js';
+import InfoWindowDiv from './InfoWindowDiv';
 
 const mapStyle = {
     // height:" 40%"
@@ -39,7 +39,7 @@ class GoogleMap extends Component {
                 <Marker
                     key={index}
                     onClick={(e)=>{this.onMarkerClick(e)}}
-                    name={element.location}
+                    name={<InfoWindowDiv selectedPlace={element} />}
                     position={{lat: element.lat, lng: element.lng}}
                 />
             )
@@ -60,26 +60,27 @@ class GoogleMap extends Component {
                 google={this.props.google}
                 //{/* INTIALIZE CENTER OF MAP */}
                 initialCenter={{
-                  lat: 40.854885,
-                  lng: -88.081807 
+                  lat: 33.9519347,
+                  lng: -83.537385
                 }}
     
                // {/* CONTROL ZOOM OF MAP */}
-                zoom={4}
+                zoom={7}
             >   
 
                 {markerList}
 
-
-                <InfoWindow
-                    position = {this.state.selectedPlace.position}
-                    marker = {this.state.activeMarker}
-                    visible = {this.state.showingInfoWindow}
-                >
-                    <div>
-                        {this.state.selectedPlace.name}
-                    </div>
-                </InfoWindow>
+                {/* <div className="map1"> */}
+                    <InfoWindow
+                        position = {this.state.selectedPlace.position}
+                        marker = {this.state.activeMarker}
+                        visible = {this.state.showingInfoWindow}
+                    >
+                        <div className="map2">
+                            {this.state.selectedPlace.name}
+                        </div>
+                    </InfoWindow>
+                {/* </div> */}
             </Map>
         </div>         
         )

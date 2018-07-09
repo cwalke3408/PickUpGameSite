@@ -12,44 +12,19 @@ class FindPickUp extends Component{
         }
     }
 
-    componentDidMount(){
-        console.log(this.props.route);
-        
+    componentDidMount(){        
         if(localStorage.curUsername !== ""){
-            // console.log(localStorage.curUsername);
-            let data = {
-                username: localStorage.curUsername
-            }
+            let data = { username: localStorage.curUsername }
     
             axios.post("http://localhost:8080/userEvents", data)
-                .then((res) => {
-                    // console.log(res.data)
-                    this.setState({myAttendingEvents: res.data.attendingEvents})
-                })
-                .catch(function(error){if (!error.error); })
+                .then(res => this.setState({myAttendingEvents: res.data.attendingEvents}))
+                .catch(function(error){if (!error.error); });
         }
 
         axios("http://localhost:8080/allEvents")
-            .then((res) => {
-                this.setState({eventsList: res.data.allEvents})
-            
-                // console.log("Inside Google")
-                // console.log(this.state.eventsList);
-        
-                // let events1= this.state.eventsList;
-                // events1.forEach(element => {
-                //     element.coords = this.getGeoCode(element.location)
-                // });
-                // console.log(events1)
-                // // this.setState({event})            
-            })
-            .catch(function(error){if(!error.error);})
-
-        // console.log(localStorage.currUsername);
-
-
+            .then(res => this.setState({eventsList: res.data.allEvents}))
+            .catch(function(error){if(!error.error);});
     }
-
 
 
     handleAttendClick(eventId){
@@ -65,11 +40,7 @@ class FindPickUp extends Component{
         }
 
         axios.post("http://localhost:8080/attendEvent", data)
-            .then((res) => {
-                // console.log("=== After Attedning ===");
-                // console.log(res);
-                this.setState({myAttendingEvents: res.data})
-            })
+            .then(res => this.setState({myAttendingEvents: res.data}))
             .catch(function(error){if(!error.error);})
     }
 
@@ -82,11 +53,8 @@ class FindPickUp extends Component{
         }
 
         axios.post("http://localhost:8080/cancelAttend", data)
-            .then((res) => {
-                // console.log("=== After Cancel ===")
-                // console.log(res);
-                this.setState({myAttendingEvents: res.data})
-            }).catch(function(error){if(!error.error);})
+            .then(res =>this.setState({myAttendingEvents: res.data}))
+            .catch(function(error){if(!error.error);})
     }
 
     render(){

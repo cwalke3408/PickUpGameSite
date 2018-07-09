@@ -69,7 +69,7 @@ class ModalAdd extends Component{
                 title: newEventEntry.title,
                 timedate: newEventEntry.time,
                 date: theDate,
-                location: location,
+                location: geoData.data.results[0].formatted_address,
                 description: newEventEntry.description,
                 author: localStorage.curUsername,
                 count: 1,
@@ -79,12 +79,8 @@ class ModalAdd extends Component{
 
 
             axios.post("http://localhost:8080/addEvent", data)
-            .then((res) => {
-                // console.log("res: "); 
-                // console.log(res.data.ownEvents);
-                this.props.onListChange(res.data.ownEvents);
-            })
-            .catch(function(error) {if (!error.error); });
+            .then(res => this.props.onListChange(res.data.ownEvents))
+            .catch(function(error) {if (!error.error);});
         })
 
         // Clear State variables
