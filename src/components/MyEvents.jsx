@@ -3,6 +3,8 @@ import MyOwnEvents from './MyOwnEvents';
 // import MyAttendingEvents from './MyAttendingEvents';
 import ModalAdd from './ModalAdd';
 import axios from 'axios';
+import backEndURL from '../backEndURL';
+
 
 class MyEvents extends Component{
     constructor(props){
@@ -24,7 +26,7 @@ class MyEvents extends Component{
             username: localStorage.curUsername
         }
 
-        axios.post("http://localhost:8080/userEvents", data)
+        axios.post(backEndURL + "userEvents", data)
             .then((res) => {
                 console.log(res.data)
                 // console.log(this.props.history);
@@ -47,7 +49,7 @@ class MyEvents extends Component{
             id: eventId
         }
 
-        axios.post("http://localhost:8080/cancelAttend", data)
+        axios.post(backEndURL + "cancelAttend", data)
             .then((res) => {
                 // console.log("=== After Cancel ===")
                 // console.log(res);
@@ -61,7 +63,7 @@ class MyEvents extends Component{
             id: e.target.name
         }
 
-        axios.post("http://localhost:8080/deleteEvent", data)
+        axios.post(backEndURL + "deleteEvent", data)
             .then((res) => {
                 // console.log(res)
                 this.setState({

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import backEndURL from '../backEndURL';
 
 class Login extends Component{
     constructor(props){
@@ -24,7 +25,7 @@ class Login extends Component{
         }
 
         
-        axios.post("http://localhost:8080/login", data)
+        axios.post(backEndURL +"login", data)
         .then((res) => {
             if(res.data === ""){
                 this.setState({

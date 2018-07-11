@@ -17,7 +17,7 @@ class MyAttendingEvents extends Component{
         //     id: eventId
         // }
 
-        // axios.post("http://localhost:8080/cancelAttend", data)
+        // axios.post((backEndURL + "cancelAttend", data)
         //     .then((res) => {
         //         console.log("=== After Cancel ===")
         //         console.log(res);

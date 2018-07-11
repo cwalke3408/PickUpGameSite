@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import apiKey from './key_creds.js';
 import DatePicker from 'react-date-picker';
+import backEndURL from '../backEndURL';
+
 
 
 class ModalAdd extends Component{
@@ -78,7 +80,7 @@ class ModalAdd extends Component{
             }
 
 
-            axios.post("http://localhost:8080/addEvent", data)
+            axios.post(backEndURL + "addEvent", data)
             .then(res => this.props.onListChange(res.data.ownEvents))
             .catch(function(error) {if (!error.error);});
         })

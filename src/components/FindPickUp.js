@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GoogleMap from './GoogleMap';
+import backEndURL from '../backEndURL';
 
 
 class FindPickUp extends Component{
@@ -12,17 +13,21 @@ class FindPickUp extends Component{
         }
     }
 
-    componentDidMount(){        
+    componentDidMount(){    
         if(localStorage.curUsername !== ""){
             let data = { username: localStorage.curUsername }
     
-            axios.post("http://localhost:8080/userEvents", data)
-                .then(res => this.setState({myAttendingEvents: res.data.attendingEvents}))
+            axios.post(backEndURL + 'userEvents', data)
+                .then(res => {
+                    // console.log(res)
+                    this.setState({myAttendingEvents: res.data.attendingEvents})})
                 .catch(function(error){if (!error.error); });
         }
 
-        axios("http://localhost:8080/allEvents")
-            .then(res => this.setState({eventsList: res.data.allEvents}))
+        axios(backEndURL + 'allEvents')
+            .then(res => {
+                // console.log(res)
+                this.setState({eventsList: res.data.allEvents})})
             .catch(function(error){if(!error.error);});
     }
 
@@ -39,27 +44,28 @@ class FindPickUp extends Component{
             id: eventId
         }
 
-        axios.post("http://localhost:8080/attendEvent", data)
-            .then(res => this.setState({myAttendingEvents: res.data}))
+        axios.post(backEndURL + 'attendEvent', data)
+            .then(res =>{
+                if(res.data !== "") this.setState({myAttendingEvents: res.data})
+                else console.log("Couldn't Add User to Event")
+            })
             .catch(function(error){if(!error.error);})
     }
 
     handleCancelClick(eventId){
         // Delete from Attedning List
-
         let data = {
             username: localStorage.curUsername,
             id: eventId
         }
 
-        axios.post("http://localhost:8080/cancelAttend", data)
+        axios.post(backEndURL + "cancelAttend", data)
             .then(res =>this.setState({myAttendingEvents: res.data}))
             .catch(function(error){if(!error.error);})
     }
 
     render(){
         let myAttendingEvents = this.state.myAttendingEvents;
-
         let allEvents = this.state.eventsList.filter((event) => {
             if(!myAttendingEvents.find((myAEvent)=>{
                 return myAEvent.id === event.id; }))

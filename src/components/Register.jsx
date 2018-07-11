@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import backEndURL from '../backEndURL';
+
 
 
 const borderErr = {
@@ -66,7 +68,7 @@ class Register extends Component{
         // 1: username already exist
         // 2: Email already exist
         // 3: username and email exist
-        axios.post("http://localhost:8080/newUser", data)
+        axios.post(backEndURL + "newUser", data)
             .then((res) => {
                 switch(res.data){
                     case 0: 
