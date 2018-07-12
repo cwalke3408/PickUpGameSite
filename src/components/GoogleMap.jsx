@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
-import apiKey from './key_creds.js';
+// import apiKey from './key_creds.js';
 import InfoWindowDiv from './InfoWindowDiv';
 
 const mapStyle = {
@@ -88,5 +88,5 @@ class GoogleMap extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: apiKey,
+    apiKey: process.env.REACT_APP_apiKey,
   })(GoogleMap);
