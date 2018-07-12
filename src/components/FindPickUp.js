@@ -13,7 +13,9 @@ class FindPickUp extends Component{
         }
     }
 
-    componentDidMount(){    
+    componentDidMount(){ 
+        console.log(process.env)
+        console.log(process.env.REACT_APP_apiKey)   
         console.log(apiKey);
         if(localStorage.curUsername !== ""){
             let data = { username: localStorage.curUsername }
