@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import apiKey from './key_creds.js';
+import apiKey from './key_creds.js';
 import DatePicker from 'react-date-picker';
 import backEndURL from '../backEndURL';
 
@@ -63,6 +63,7 @@ class ModalAdd extends Component{
         axios({
             method: 'get',
             url: `https://maps.googleapis.com/maps/api/geocode/json?address=+${location}&key=${process.env.REACT_APP_apiKey}`
+            // url: `https://maps.googleapis.com/maps/api/geocode/json?address=+${location}&key=${apiKey}`
         }).then(geoData => {
             console.log(geoData.data.results[0].geometry.location)
 

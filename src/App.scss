@@ -1,10 +1,11 @@
-$main-back-color: rgb(205, 224, 252);
-$primary-color: rgb(9, 151, 187);
-$secdary-color: rgb(11, 23, 36);
+$main-back-color: #EDF5E1;
+$primary-color: #5CDB95;
+$secdary-back-color: #379683;
+$secdary-color: #05386B;
 $font-statck: Helvetica, sans-serif;
 
 body{
-    background-color: $main-back-color;
+    background-color: $secdary-back-color;
     font: $font-statck;
 
     .headerBox{
@@ -18,12 +19,12 @@ body{
 
         h2{
             margin: 0px;
-
         }
     }
 }
 
 .NavBarBody{
+    background-color: $secdary-color;
     ul {
         list-style-type: none;
         margin: 0;
@@ -140,17 +141,10 @@ body{
         h2{
             padding-top: 0;
         }
-
-        
-
-        // a{
-        //     display: block;
-        // }
     }
 }
 
 .myEventsBody{
-
     .attendingBody{
         background-color: $primary-color;
         border: 2px black solid;
@@ -160,16 +154,11 @@ body{
             border-radius: 4px;
             color: $secdary-color;
             background-color: aliceblue;
-
         }
     }
-
-
 }
 
 .FindPickUpBody{
-
-
     .mapNews{
         // position: relative;
 
@@ -190,10 +179,16 @@ body{
 
     .newsFeed{
         border: 1px $secdary-color solid;
-        border-radius: 0px 0px 8px 8px;
+        border-radius: 8px 8px 0px 0px;
         background-color: cornsilk;
         // margin: 10px 0px;
         // margin-top: 300px !important;
+        max-height: 660px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        // box-shadow: 1px 1px 2px 2px $secdary-color;
+
+
 
         .aEventBox{
             background-color: cornsilk;
@@ -237,8 +232,6 @@ body{
                 margin-top: 5px;
                 height: 100% !important;
             }
-
-
         }
     }
 
@@ -251,6 +244,7 @@ body{
         background-color: rgba(0,0,0,0.3);
         padding: 0;
         z-index: 10;
+        overflow: scroll;
     
         .modalForeDrop{
             position: relative;
@@ -264,6 +258,26 @@ body{
     
         }
     }
-
 }
 
+
+    /* Scroll Bar */
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: cornsilk; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: $secdary-color; 
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: $secdary-color; 
+    }

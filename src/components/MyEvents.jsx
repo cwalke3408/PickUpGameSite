@@ -28,7 +28,7 @@ class MyEvents extends Component{
 
         axios.post(backEndURL + "userEvents", data)
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 // console.log(this.props.history);
                 // console.log(localStorage);
                 this.setState({

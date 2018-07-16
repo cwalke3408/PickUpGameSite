@@ -16,9 +16,10 @@ class BootstrapNavBar extends Component{
     }
 
     componentDidMount(){
-        (localStorage.curUsername === "") ?
-            this.setState({loggedIn: false}) :
-            this.setState({loggedIn: true})
+        if ('curUsername' in localStorage) 
+            (localStorage.curUsername === "") ?
+                this.setState({loggedIn: false}) :
+                this.setState({loggedIn: true});
     }
 
     handleLogOut(){
@@ -33,7 +34,7 @@ class BootstrapNavBar extends Component{
     render(){
         let tags = null;
 
-        if(localStorage.curUsername !== ""){
+        if('curUsername' in localStorage && localStorage.curUsername !== ""){
             tags= <ul className="nav navbar-nav navbar-right">
                     {/* <li style={mainTag}><Link to="/">PickUpAround</Link></li> */}
                     {/* <li><Link to="/">{localStorage.curUsername}</Link></li> */}
