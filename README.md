@@ -17,13 +17,14 @@ Delete events that they created
 A User Dashboard "My Events" where a user can view events they have created and events they plain to attend.
 
 ## Tools
-#### React Router with React-router-dom module
+#### React (version: 16.4.1)
+#### React Router with React-router-dom (version: 4.3.1)
 * A React routing library
 * Used to setup different pages for Home, My Events, Sign Up, and Log in
-#### Axios
+#### Axios (version: 0.18.0)
 * Promise base HTTP client for the browser and node.js
 * Make http request to the backend and APIs
-#### Google-maps-react
+#### Google-maps-react (version: 2.0.2)
 * A declarative Google Map React component that uses Google Maps API
 * Use as a feature of the project
 #### Google GeoCode API
@@ -32,7 +33,7 @@ A User Dashboard "My Events" where a user can view events they have created and 
 * Google GeoCode API helps convert a location into a geograpic coordinates.  
 * When the user create a new event, user must specify location of city and state.  Once that infomation is given, it pass to Google GeoCode API using a GET request and the API returns geographic coordinates that best matches the provided location.
 
-#### React-date-picker
+#### React-date-picker (version: 6.10.4)
 * A simple date picker component for React
 * A feature provided in 'Create Event'
 
