@@ -43,16 +43,14 @@ class MyEvents extends Component{
         this.setState({show: true});
     }
 
-    handleCancelClick(eventId){
+    handleCancelClick(e){
         let data = {
             username: localStorage.curUsername,
-            id: eventId
+            id: e.target.name
         }
 
         axios.post(backEndURL + "cancelAttend", data)
             .then((res) => {
-                // console.log("=== After Cancel ===")
-                // console.log(res);
                 this.setState({myAttendingEvents: res.data})
             }).catch(function(error){if(!error.error);})
     }
@@ -115,7 +113,7 @@ class MyEvents extends Component{
                     
                     </div>
                     <div className="col-sm-3 cardButton">
-                        <button name={element.id} onClick={(e)=>{this.handleClick(e)}} className="btn btn-danger btn-block cardButton">Delete</button>
+                        <button name={element.id} onClick={(e)=>{this.handleCancelClick(e)}} className="btn btn-danger btn-block cardButton">Delete</button>
                     </div>
                 </div>
             </div>
